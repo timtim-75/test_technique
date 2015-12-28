@@ -9,14 +9,12 @@ router.get('/', function(req, res, next) {
 
   Restaurant.find(function (err, restaurants) {
     if (err) return next(err);
-    console.log(restaurants)
     res.json(restaurants);
   });
 
 });
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
   Restaurant.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

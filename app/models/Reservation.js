@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 
 var ReservationSchema = new mongoose.Schema({
   	restaurant: String,
-	date: Date,
+	date: String,
 	hour: String,
-	number: Number,
+	number: String,
 	clientName: String,
 	clientNumber: String,
   	updated_at: { type: Date, default: Date.now },

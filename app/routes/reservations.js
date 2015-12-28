@@ -9,13 +9,14 @@ router.get('/', function(req, res, next) {
 
   Reservation.find(function (err, reservations) {
     if (err) return next(err);
-    console.log(reservations)
+    console.log(reservations);
     res.json(reservations);
   });
 
 });
 
 router.post('/', function(req, res, next) {
+  console.log(req.body);
   Reservation.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

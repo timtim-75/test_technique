@@ -12,20 +12,43 @@ app.factory('Reservations', ['$resource', function($resource){
       });
     }])
 
-    .controller('Controller', ['$scope', 'Reservations', function ($scope, Reservations) {
+    .controller('Controller', ['$scope', function ($scope) {
     	$scope.currentPage= 'home';
-      	
+    	$scope.currentRestaurant = {};
+      	$scope.hour = '00';
+      	$scope.minute = '00';
+      	$scope.day = '01';
+      	$scope.month = '01';
+      	$scope.year = '2016';
+      	$scope.capacity = '1';
 
-      	$scope.changePage = function(path){
+      	$scope.changePage = function(path, restaurant){
       		$scope.currentPage = path;
+      		$scope.currentRestaurant = restaurant;
+
+      		console.log($scope.currentPage);
       	}
 
     }])
     .controller('ReservationController', ['$scope', 'Reservations', function ($scope, Reservations) {
+    	$scope.clientName = '';
+    	$scope.clientNumber = '';
+    	$scope.newReservation = {};
     	$scope.reservations = Reservations.query();
+    	console.log($scope.reservations);
       	$scope.save = function(){
     		if(!$scope.newReservation || $scope.newReservation.length < 1) return;
-    		var reservation = new Reservations({ name: $scope.newReservation, completed: false });
+    		var date = $scope.day + '/' + $scope.month + '/' + $scope.year;
+    		var hour = $scope.hour + 'h' + $scope.minute;
+    		var reservation = new Reservations({ 
+    			restaurant: $scope.currentRestaurant._id,
+    			date: date,
+    			hour: hour,
+    			number: $scope.capacity,
+    			clientName: $scope.clientName,
+    			clientNumber: $scope.clientNumber
+    		});
+    		console.log(reservation);
         	reservation.$save(function(){
 	          $scope.reservations.push(reservation);
 	          $scope.newReservation = ''; // clear textbox
@@ -72,26 +95,26 @@ app.factory('Reservations', ['$resource', function($resource){
 	        });
 	    }
 	    $scope.update = function(index){
-             var restaurant = $scope.restaurants[index];
-             restaurants.update({id: restaurant._id}, restaurant);
-             $scope.editing[index] = false;
-           }
- 
-           $scope.edit = function(index){
-             $scope.editing[index] = angular.copy($scope.restaurants[index]);
-           }
- 
-           $scope.cancel = function(index){
-             $scope.restaurants[index] = angular.copy($scope.editing[index]);
-             $scope.editing[index] = false;
-           }
+         	var restaurant = $scope.restaurants[index];
+         	restaurants.update({id: restaurant._id}, restaurant);
+         	$scope.editing[index] = false;
+       	}
 
-          $scope.remove = function(index){
-           var restaurant = $scope.restaurants[index];
-           restaurants.remove({id: restaurant._id}, function(){
-              $scope.restaurants.splice(index, 1);
-            });
-          }
+       $scope.edit = function(index){
+         	$scope.editing[index] = angular.copy($scope.restaurants[index]);
+       	}
+
+       $scope.cancel = function(index){
+         	$scope.restaurants[index] = angular.copy($scope.editing[index]);
+         	$scope.editing[index] = false;
+       	}
+
+      	$scope.remove = function(index){
+       		var restaurant = $scope.restaurants[index];
+       		Restaurants.remove({id: restaurant._id}, function(){
+          	$scope.restaurants.splice(index, 1);
+        });
+     }
 
 	}])
 	.config(['$routeProvider', function ($routeProvider) {

@@ -1,81 +1,170 @@
 <!DOCTYPE html>
 <html>
-	<html ng-app="myApp">
-	  	<head>
-	    	<title><%= title %></title>
-	    	<link rel="stylesheet" href="/css/style.css" />
-	    	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-resource.min.js"></script>
-    		<script src="/app/app.js"></script>
-    		<script src="/app/core/homepage.controller.js"></script>
-	  	</head>
-	  	<body>
-	  		<div ng-controller="Controller" class="container">
-	  			<div class="col-md-12">
-	  				<div class="col-md-6 col-md-offset-3">
-			   			<h1><%= title %></h1>
+	<div ng-app="myApp">
+		<div ng-controller="Controller" class="container">
+		  	<head>
+		    	<title><%= title %></title>
+		    	<link rel="stylesheet" href="/css/style.css" />
+		    	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	    		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+				<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+				<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-resource.min.js"></script>
+	    		<script src="/app/app.js"></script>
+	    		<script src="/app/core/homepage.controller.js"></script>
+	    		<script src="/lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+		  	</head>
+		  	<header>
+		  		<% include ./partials/header %>
+		  	</header>
+		  	<body>
+	  			<div class="col-md-12" ng-if="currentPage =='home'">
+	  				<div class="col-md-12 title">
+			   			<h1>Bienvenue sur RestoBook</h1>
+			   			<div class=" col-md-12 search-restaurant">
+			   				<div class="row">
+			   					<span>Je cherche un restaurant pour le </span>
+			   					<input class="input-search" ng-model="day">
+			   					<span> / </span>
+			   					<input class="input-search" ng-model="month">
+			   					<span> / </span>
+			   					<input class="input-search" ng-model="year">
+			   					<span> Pour </span>
+			   					<input class="input-search" ng-model="capacity">
+			   					<span> personne(s) à </span>
+			   					<input class="input-search" ng-model="hour">
+			   					<span> h </span>
+			   					<input class="input-search" ng-model="minute">
+			   					<button class="btn btn-search">Rechercher</button>
+			   				</div>
+			   			</div>
 			   		</div>
-			   	</div>
-			   	<div ng-controller="ReservationController">
-				   	<div class="col-md-6 col-md-offset-3">
-				    	<p>Welcome to Reservation</p>
-				    	<input ng-model="newReservation">
-				    	<button ng-click="save()">ADD TODO</button>
-				    	<li ng-repeat="reservation in reservations | filter: search">
-				           <input type="checkbox" ng-model="todo.completed">
-				           <a>{{todo.name}}</a>
-				        </li>
-				    </div>
-				</div>
-			    <div ng-controller= "RestaurantController">
-				    <div class="col-md-6 col-md-offset-3">
-				    	<p>Welcome to Restaurant</p>
-				    	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-						  Ajouter un restaurant
-						</button>
+				    <div ng-controller= "RestaurantController">
+					    <div class="col-md-12">
+					    	<button ng-if="currentPage == 'admin'" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+							  Ajouter un restaurant
+							</button>
 
-						<!-- Modal -->
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<!-- Modal -->
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							  	<div class="modal-dialog" role="document">
+								    <div class="modal-content">
+									    <div class="modal-header">
+									       	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									        <h4 class="modal-title" id="myModalLabel">Ajouter un restaurant</h4>
+									    </div>
+									    <div class="modal-body">
+									    	<div class="col-md-12">
+									    		<div class="input-group">
+									    			<h4> Général </h4>
+											        <input class="add-restaurant-input" ng-model="newRestaurant.name" placeholder="nom">
+											        <input class="add-restaurant-input" ng-model="newRestaurant.address" placeholder="adresse">
+											        <input class="add-restaurant-input" ng-model="newRestaurant.capacity" placeholder="capacité">
+											        <h4> Accès restaurateur</h4>
+											        <input class="add-restaurant-input" ng-model="newRestaurant.login" placeholder="Login">
+											        <input class="add-restaurant-input" ng-model="newRestaurant.password" placeholder="Mot de passe">
+											        <h4> Horaires de réservations </h4>
+
+											    </div>
+										    </div>
+									    </div>
+									    <div class="modal-footer">
+									       	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									        <button type="button" class="btn btn-primary" ng-click="save()" data-dismiss="modal">Sauver ce restaurant</button>
+									    </div>
+
+									</div>
+							  	</div>
+							</div>
+							<div ng-repeat="restaurant in restaurants | filter: search">
+								<div class="col-md-3">
+									<div class="restaurant-tile" ng-click="changePage('resto', restaurant);">
+										<div class="restaurant-picture">
+											<img ng-if="restaurant.pictures[0]" ng-src="restaurant.pictures[0]">
+											<img ng-if="!restaurant.pictures[0]" src="http://www.lescapade-rebberg.fr/wp-content/uploads/2014/09/Restaurant.jpg">
+										</div>
+										<div class="restaurant-meta">
+											<div class="restaurant-name">
+												<h4>{{restaurant.name}}</h4>
+											</div>
+											<div class="restaurant-address">
+												<h4>{{restaurant.address}}</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					    </div>
+					</div>
+				</div>
+				<div class="col-md-12" ng-if="currentPage == 'resto'" ng-controller="ReservationController">
+					<div class="name">
+						<h1>{{currentRestaurant.name}}</h1>
+					</div>
+					<div class="row">
+						<div class="restaurant-page-picture col-md-6">
+							<img ng-if="currentRestaurant.pictures[0]" ng-src="currentRestaurant.pictures[0]">
+							<img ng-if="!currentRestaurant.pictures[0]" src="http://www.lescapade-rebberg.fr/wp-content/uploads/2014/09/Restaurant.jpg">
+						</div>
+						<div class="restaurant-page-meta col-md-6">
+							<h4>Adresse : {{currentRestaurant.address}}</h4>
+							<h4>Capacité : {{currentRestaurant.capacity}} personnes</h4>
+							<button class="btn btn-reserve" data-toggle="modal" data-target="#reservation-modale">Réserver</button>
+							<div class="col-md-12">
+								<div ng-repeat="reservation in reservations">
+									<div ng-if="reservation.restaurant==currentRestaurant._id" style="color:black;">{{reservation.clientName}} a reservé ce restaurant pour le {{reservation.date}} pour {{reservation.number}} personnes à {{reservation.hour}}.</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal fade" id="reservation-modale" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						  	<div class="modal-dialog" role="document">
 							    <div class="modal-content">
 								    <div class="modal-header">
 								       	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								        <h4 class="modal-title" id="myModalLabel">Ajouter un restaurant</h4>
+								        <h4 class="modal-title" id="myModalLabel">Réserver ce restaurant</h4>
 								    </div>
 								    <div class="modal-body">
 								    	<div class="col-md-12">
 								    		<div class="input-group">
-								    			<h4> Général </h4>
-										        <input class="add-restaurant-input" ng-model="newRestaurant.name" placeholder="nom">
-										        <input class="add-restaurant-input" ng-model="newRestaurant.address" placeholder="adresse">
-										        <input class="add-restaurant-input" ng-model="newRestaurant.capacity" placeholder="capacité">
-										        <h4> Accès restaurateur</h4>
-										        <input class="add-restaurant-input" ng-model="newRestaurant.login" placeholder="Login">
-										        <input class="add-restaurant-input" ng-model="newRestaurant.password" placeholder="Mot de passe">
-										        <h4> Horaires de réservations </h4>
-
+								    			<span>Pour le </span>
+							   					<input class="input-search" ng-model="day">
+							   					<span> / </span>
+							   					<input class="input-search" ng-model="month">
+							   					<span> / </span>
+							   					<input class="input-search" ng-model="year">
+							   					<span> Pour </span>
+							   					<input class="input-search" ng-model="capacity">
+							   					<span> personne(s) à </span>
+							   					<input class="input-search" ng-model="hour">
+							   					<span> h </span>
+							   					<input class="input-search" ng-model="minute">
 										    </div>
+									    </div>
+									    <div class="col-md-12">
+									    	Vos coordonnées :
+									    </div>
+									    <div class="col-md-12">
+									    	<span> Nom </span>
+									    	<input class="input-coordonnées" ng-model="clientName">
+									    	<span> Téléphone</span>
+									    	<input class="input-coordonnées" ng-model="clientNumber">
 									    </div>
 								    </div>
 								    <div class="modal-footer">
 								       	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								        <button type="button" class="btn btn-primary" ng-click="save()">Sauver ce restaurant</button>
+								        <button type="button" class="btn btn-primary" ng-click="save()" data-dismiss="modal">Réserver</button>
 								    </div>
 
 								</div>
 						  	</div>
 						</div>
-						<div> Restaurants</div>
-						<div ng-repeat="restaurant in restaurants | filter: search">
-							{{restaurant.name}}
-						</div>
-				    </div>
+					</div>
 				</div>
-	    	</div>
-	  	</body>
-	 </html>
+	  		</body>
+	  	</div>
+	 </div>
 </html>
+
+
