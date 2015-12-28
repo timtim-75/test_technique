@@ -1,78 +1,6 @@
 
 'user script'
 
-// app.controller('HomepageCtrl', function($scope, $http){
-// 	$scope.formData = {};
-// 	$http.get('/todos')
-//         .success(function(data) {
-//             $scope.todos = data;
-//             console.log($scope.todos);
-//         })
-//         .error(function(data) {
-//             console.log('Error: ' + data);
-//         });
-
-//     // when submitting the add form, send the text to the node API
-//     $scope.createTodo = function() {
-//     	console.log($scope.formData);
-//     	var todo = {name :$scope.formData, completed:false, note:''};
-//         $http.post('/todos', todo)
-//             .success(function(data) {
-//                 $scope.formData = {}; // clear the form so our user is ready to enter another
-//                 $scope.todos = data;
-//             })
-//             .error(function(data) {
-//                 console.log('Error: ' + data);
-//             });
-//     };
-
-//     // delete a todo after checking it
-//     $scope.deleteTodo = function(id) {
-//         $http.delete('/todos/' + id)
-//             .success(function(data) {
-//                 $scope.todos = data;
-//             })
-//             .error(function(data) {
-//                 console.log('Error: ' + data);
-//             });
-//     };
-
-//     $http.get('/users')
-//         .success(function(data) {
-//             $scope.todos = data;
-//             console.log($scope.todos);
-//         })
-//         .error(function(data) {
-//             console.log('Error: ' + data);
-//         });
-
-//     // when submitting the add form, send the text to the node API
-//     $scope.createUser = function() {
-
-//         $http.post('/users', $scope.formData)
-//             .success(function(data) {
-//                 $scope.formData = {}; // clear the form so our user is ready to enter another
-//                 $scope.todos = data;
-//             })
-//             .error(function(data) {
-//                 console.log('Error: ' + data);
-//             });
-//     };
-
-//     // delete a todo after checking it
-//     $scope.deleteTodo = function(id) {
-//         $http.delete('/users/' + id)
-//             .success(function(data) {
-//                 $scope.todos = data;
-//             })
-//             .error(function(data) {
-//                 console.log('Error: ' + data);
-//             });
-//     };
-// })
-// 
-
-
 app.factory('Todos', ['$resource', function($resource){
           return $resource('/todos/:id', null, {
             'update': { method:'PUT' }
@@ -112,7 +40,7 @@ app.factory('Todos', ['$resource', function($resource){
 	          }
 
         }])
-    .config(['$routeProvider', function ($routeProvider) {
+    	.config(['$routeProvider', function ($routeProvider) {
            $routeProvider
              .when('/', {
                templateUrl: '/todos.html',

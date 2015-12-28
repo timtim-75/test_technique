@@ -12,20 +12,23 @@
 			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-resource.min.js"></script>
     		<script src="/app/app.js"></script>
     		<script src="/app/core/homepage.controller.js"></script>
+    		<script src="less.js" type="text/javascript"></script>
 	  	</head>
-	  	<header>
-	        <% include partials/header %>
-	    </header>
 	  	<body>
-	  		<div ng-controller="HomepageCtrl">
-		   		<h1><%= title %></h1>
-		    	<p>Welcome to <%= title %></p>
-		    	<input ng-model="newTodo"></input>
-		    	<button ng-click="save()">ADD TODO</button>
-		    	<li ng-repeat="todo in todos | filter: search">
-		           <input type="checkbox" ng-model="todo.completed">
-		           <a>{{todo.name}}</a>
-		        </li>
+	  		<div ng-controller="HomepageCtrl" class="container">
+	  			<div class="col-md-12">
+	  				<div class="col-md-6 col-md-offset-3">
+			   			<h1><%= title %></h1>
+			   		</div>
+			   	<div class="col-md-6 col-md-offset-3">
+			    	<p>Welcome to <%= title %></p>
+			    	<input ng-model="newTodo"></input>
+			    	<button ng-click="save()">ADD TODO</button>
+			    	<li ng-repeat="todo in todos | filter: search">
+			           <input type="checkbox" ng-model="todo.completed">
+			           <a>{{todo.name}}</a>
+			        </li>
+			    </div>
 	    	</div>
 	  	</body>
 	 </html>
