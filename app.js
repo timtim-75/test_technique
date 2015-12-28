@@ -24,12 +24,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/todos', todos);
 
 
-mongoose.connect('mongodb://localhost/27017/todos', function(err) {
+mongoose.connect('mongodb://localhost/test_technique', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
@@ -68,6 +69,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
