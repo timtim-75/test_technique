@@ -3,13 +3,17 @@
 	<html ng-app="myApp">
 	  	<head>
 	    	<title><%= title %></title>
-	    	<link rel='stylesheet' href='/stylesheets/style.css' />
+	    	<link rel='stylesheet' href='./css/style.css' />
 	    	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    		<script src="/app/app.js"></script>
+    		<script src='/app/core/homepage.controller.js'></script>
 	  	</head>
 	  	<body>
-	   		<h1><%= title %></h1>
-	    	<p>Welcome to <%= title %></p>
+	  		<div ng-controller="HomepageCtrl">
+		   		<h1><%= title %></h1>
+		    	<p>Welcome to <%= title %></p>
+	    	</div>
 	  	</body>
 	 </html>
 </html>

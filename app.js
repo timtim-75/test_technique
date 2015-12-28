@@ -6,13 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var todos = require('./routes/todos');
+var routes = require('./app/routes/index');
+var users = require('./app/routes/users');
+var todos = require('./app/routes/todos');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname,'/app','views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -34,10 +34,6 @@ mongoose.connect('mongodb://localhost/test_technique', function(err) {
     } else {
         console.log('connection successful');
     }
-});
-
- app.get('*', function(req, res) {
-    res.sendfile('./public/app/core/homepage.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
 
