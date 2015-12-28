@@ -1,6 +1,37 @@
+
 'user script'
 
-app.controller('HomepageCtrl', function($scope){
-	$scope.message='Salut, j\'existe';
-	console.log($scope.message);
+app.controller('HomepageCtrl', function($scope, $http){
+	$scope.formData = {};
+	$http.get('/todos')
+        .success(function(data) {
+            $scope.todos = data;
+            console.log($scope.todos);
+        })
+        .error(function(data) {
+            console.log('Error: ' + data);
+        });
+
+    // when submitting the add form, send the text to the node API
+    $scope.createTodo = function() {
+        $http.post('/todos', $scope.formData)
+            .success(function(data) {
+                $scope.formData = {}; // clear the form so our user is ready to enter another
+                $scope.todos = data;
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+
+    // delete a todo after checking it
+    $scope.deleteTodo = function(id) {
+        $http.delete('/todos/' + id)
+            .success(function(data) {
+                $scope.todos = data;
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
 })

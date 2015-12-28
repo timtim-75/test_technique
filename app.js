@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var routes = require('./app/routes/index');
 var users = require('./app/routes/users');
 var todos = require('./app/routes/todos');
+
 var app = express();
 
 // view engine setup
@@ -28,7 +29,7 @@ app.use('/users', users);
 app.use('/todos', todos);
 
 
-mongoose.connect('mongodb://localhost/test_technique', function(err) {
+mongoose.connect('mongodb://localhost/27017/todos', function(err) {
     if(err) {
         console.log('connection error', err);
     } else {
