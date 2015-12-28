@@ -14,7 +14,7 @@ app.factory('Reservations', ['$resource', function($resource){
 
     .controller('Controller', ['$scope', 'Reservations', function ($scope, Reservations) {
     	$scope.currentPage= 'home';
-      	$scope.reservations = Reservations.query();
+      	
 
       	$scope.changePage = function(path){
       		$scope.currentPage = path;
@@ -22,6 +22,7 @@ app.factory('Reservations', ['$resource', function($resource){
 
     }])
     .controller('ReservationController', ['$scope', 'Reservations', function ($scope, Reservations) {
+    	$scope.reservations = Reservations.query();
       	$scope.save = function(){
     		if(!$scope.newReservation || $scope.newReservation.length < 1) return;
     		var reservation = new Reservations({ name: $scope.newReservation, completed: false });
@@ -56,14 +57,18 @@ app.factory('Reservations', ['$resource', function($resource){
     }])
 	.controller('RestaurantController', ['$scope', 'Restaurants', function($scope, Restaurants){
 		$scope.restaurants = Restaurants.query();
+		$scope.newRestaurant = {};
       	$scope.save = function(){
-      		console.log($scope.restaurants);
     		if(!$scope.newRestaurant || $scope.newRestaurant.length < 1) return;
-    		var restaurant = new Restaurants({ name: $scope.newRestaurant, completed: false });
+    		var restaurant = new Restaurants({ 
+    			name: $scope.newRestaurant.name, 
+    			address: $scope.newRestaurant.address, 
+    			capacity: $scope.newRestaurant.capacity
+    		});
+
         	restaurant.$save(function(){
 	          $scope.restaurants.push(restaurant);
 	          $scope.newRestaurant = ''; // clear textbox
-	          console.log($scope.restaurants)
 	        });
 	    }
 	    $scope.update = function(index){

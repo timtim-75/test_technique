@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  console.log('Hey');
+  console.log(req.body);
   Restaurant.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

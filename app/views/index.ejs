@@ -22,24 +22,57 @@
 			   	</div>
 			   	<div ng-controller="ReservationController">
 				   	<div class="col-md-6 col-md-offset-3">
-				    	<p>Welcome to <%= title %></p>
-				    	<input ng-model="newReservation"></input>
+				    	<p>Welcome to Reservation</p>
+				    	<input ng-model="newReservation">
 				    	<button ng-click="save()">ADD TODO</button>
 				    	<li ng-repeat="reservation in reservations | filter: search">
 				           <input type="checkbox" ng-model="todo.completed">
 				           <a>{{todo.name}}</a>
 				        </li>
 				    </div>
-				 </div>
+				</div>
 			    <div ng-controller= "RestaurantController">
 				    <div class="col-md-6 col-md-offset-3">
-				    	<p>Welcome to <%= title %></p>
-				    	<input ng-model="newRestaurant"></input>
-				    	<button ng-click="save()">ADD TODO</button>
-				    	<li ng-repeat="restaurant in restaurants | filter: search">
-				           <input type="checkbox" ng-model="restaurant.completed">
-				           <a>{{restaurant.name}}</a>
-				        </li>
+				    	<p>Welcome to Restaurant</p>
+				    	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+						  Ajouter un restaurant
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  	<div class="modal-dialog" role="document">
+							    <div class="modal-content">
+								    <div class="modal-header">
+								       	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								        <h4 class="modal-title" id="myModalLabel">Ajouter un restaurant</h4>
+								    </div>
+								    <div class="modal-body">
+								    	<div class="col-md-12">
+								    		<div class="input-group">
+								    			<h4> Général </h4>
+										        <input class="add-restaurant-input" ng-model="newRestaurant.name" placeholder="nom">
+										        <input class="add-restaurant-input" ng-model="newRestaurant.address" placeholder="adresse">
+										        <input class="add-restaurant-input" ng-model="newRestaurant.capacity" placeholder="capacité">
+										        <h4> Accès restaurateur</h4>
+										        <input class="add-restaurant-input" ng-model="newRestaurant.login" placeholder="Login">
+										        <input class="add-restaurant-input" ng-model="newRestaurant.password" placeholder="Mot de passe">
+										        <h4> Horaires de réservations </h4>
+
+										    </div>
+									    </div>
+								    </div>
+								    <div class="modal-footer">
+								       	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								        <button type="button" class="btn btn-primary" ng-click="save()">Sauver ce restaurant</button>
+								    </div>
+
+								</div>
+						  	</div>
+						</div>
+						<div> Restaurants</div>
+						<div ng-repeat="restaurant in restaurants | filter: search">
+							{{restaurant.name}}
+						</div>
 				    </div>
 				</div>
 	    	</div>
