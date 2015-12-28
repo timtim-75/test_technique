@@ -2,44 +2,46 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Todo = require('../models/Todo.js');
+var Reservation = require('../models/Reservation.js');
 
-/* GET /todos listing. */
+/* GET /reservations listing. */
 router.get('/', function(req, res, next) {
 
-  Todo.find(function (err, todos) {
+  Reservation.find(function (err, reservations) {
     if (err) return next(err);
-    console.log(todos)
-    res.json(todos);
+    console.log(reservations)
+    res.json(reservations);
   });
+
 });
 
 router.post('/', function(req, res, next) {
-  Todo.create(req.body, function (err, post) {
+  Reservation.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
 router.get('/:id', function(req, res, next) {
-  Todo.findById(req.params.id, function (err, post) {
+  Reservation.findById(req.params.id, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
 router.put('/:id', function(req, res, next) {
-  Todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  Reservation.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
 router.delete('/:id', function(req, res, next) {
-  Todo.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  Reservation.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
+
 
 module.exports = router;

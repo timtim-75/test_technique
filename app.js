@@ -8,7 +8,8 @@ var mongoose = require('mongoose');
 
 var routes = require('./app/routes/index');
 var users = require('./app/routes/users');
-var todos = require('./app/routes/todos');
+var reservations = require('./app/routes/reservations');
+var restaurants = require('./app/routes/restaurants');
 
 var app = express();
 
@@ -27,7 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/todos', todos);
+app.use('/reservations', reservations);
+app.use('/restaurants', restaurants);
 
 
 

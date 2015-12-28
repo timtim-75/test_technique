@@ -12,23 +12,36 @@
 			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-resource.min.js"></script>
     		<script src="/app/app.js"></script>
     		<script src="/app/core/homepage.controller.js"></script>
-    		<script src="less.js" type="text/javascript"></script>
 	  	</head>
 	  	<body>
-	  		<div ng-controller="HomepageCtrl" class="container">
+	  		<div ng-controller="Controller" class="container">
 	  			<div class="col-md-12">
 	  				<div class="col-md-6 col-md-offset-3">
 			   			<h1><%= title %></h1>
 			   		</div>
-			   	<div class="col-md-6 col-md-offset-3">
-			    	<p>Welcome to <%= title %></p>
-			    	<input ng-model="newTodo"></input>
-			    	<button ng-click="save()">ADD TODO</button>
-			    	<li ng-repeat="todo in todos | filter: search">
-			           <input type="checkbox" ng-model="todo.completed">
-			           <a>{{todo.name}}</a>
-			        </li>
-			    </div>
+			   	</div>
+			   	<div ng-controller="ReservationController">
+				   	<div class="col-md-6 col-md-offset-3">
+				    	<p>Welcome to <%= title %></p>
+				    	<input ng-model="newReservation"></input>
+				    	<button ng-click="save()">ADD TODO</button>
+				    	<li ng-repeat="reservation in reservations | filter: search">
+				           <input type="checkbox" ng-model="todo.completed">
+				           <a>{{todo.name}}</a>
+				        </li>
+				    </div>
+				 </div>
+			    <div ng-controller= "RestaurantController">
+				    <div class="col-md-6 col-md-offset-3">
+				    	<p>Welcome to <%= title %></p>
+				    	<input ng-model="newRestaurant"></input>
+				    	<button ng-click="save()">ADD TODO</button>
+				    	<li ng-repeat="restaurant in restaurants | filter: search">
+				           <input type="checkbox" ng-model="restaurant.completed">
+				           <a>{{restaurant.name}}</a>
+				        </li>
+				    </div>
+				</div>
 	    	</div>
 	  	</body>
 	 </html>
